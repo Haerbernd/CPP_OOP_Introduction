@@ -1,3 +1,10 @@
-//
-// Created by haerbernd on 11.05.25.
-//
+#include "game.h"
+#include <cstdlib>
+
+int main() {
+    Player player {"Alice", 100, 10};
+    Dungeon dungeon;
+    Game game {&player, &dungeon};
+
+    return EXIT_SUCCESS;
+}
