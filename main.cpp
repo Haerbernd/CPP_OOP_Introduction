@@ -1,4 +1,4 @@
-#include <iostream>
+#include <string>
 #include <cstdlib>
 
 class GameCharacter {
@@ -7,9 +7,12 @@ class GameCharacter {
         int maxHealth;
         int currentHealth;
         int damage;
+        bool isAlive;
 
     GameCharacter(std::string, int, int, int);
     GameCharacter(std::string, int, int);
+    void takeDamage(int);
+    void heal(int);
 };
 
 GameCharacter::GameCharacter(std::string _name, int _maxHealth, int _currentHealth, int _damage) {
@@ -17,9 +20,29 @@ GameCharacter::GameCharacter(std::string _name, int _maxHealth, int _currentHeal
     maxHealth = _maxHealth;
     currentHealth = _currentHealth;
     damage = _damage;
+    isAlive = true;
 }
 
-GameCharacter::GameCharacter(std::string _name, int _health, int _damage): name(_name), maxHealth(_health), currentHealth(_health), damage(_damage) {}
+GameCharacter::GameCharacter(std::string _name, int _health, int _damage): name(_name), maxHealth(_health), currentHealth(_health), damage(_damage) {
+    isAlive = true;
+}
+
+void GameCharacter::takeDamage(int amount) {
+    currentHealth -= amount;
+    if (currentHealth <= 0) {
+        currentHealth = 0;
+        isAlive = false;
+    }
+}
+
+void GameCharacter::heal(int amount) {
+    currentHealth += amount;
+    if (currentHealth > maxHealth) {
+        currentHealth = maxHealth;
+    }
+}
+
+
 
 
 
