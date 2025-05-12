@@ -15,6 +15,8 @@ class Player: public GameCharacter {
         void heal(int);
         void moveToRoom(room *);
         void retreat();
+        void pickUpItem(item);
+        int getMaxHealth();
 };
 
 #endif

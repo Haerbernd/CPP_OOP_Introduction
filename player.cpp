@@ -20,3 +20,12 @@ void Player::retreat() {
     currentRoom = previousRoom;
     previousRoom = tempRoom;
 }
+
+void Player::pickUpItem(item _item) {
+    heal(_item.health);
+    damage += _item.damage;
+}
+
+int Player::getMaxHealth() {
+    return maxHealth;
+}

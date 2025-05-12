@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.31)
-project(CPP_OOP_Introduction)
+project(Basic_Dungeon_Crawler)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(OOP_Intro_Game main.cpp
+add_executable(Basic_Dungeon_Crawler main.cpp
         room.cpp
         dungeon.cpp
         dungeon.h
@@ -12,4 +12,5 @@ add_executable(OOP_Intro_Game main.cpp
         player.cpp
         player.h
         game.cpp
-        game.h)
+        game.h
+        item.cpp)

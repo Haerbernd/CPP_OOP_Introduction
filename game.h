@@ -23,6 +23,7 @@ class Game {
         void initiateRoomSequence();
         void handleEnemyActions();
         void engageInCombat();
+        void handleItemActions();
 };
 
 #endif

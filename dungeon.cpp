@@ -33,4 +33,18 @@ void Dungeon::setUpDungeon() {
     rooms[1][2].enemies.push_back(goblin1);
     rooms[2][1].enemies.push_back(goblin2);
     rooms[2][2].enemies.push_back(troll);
+
+    item healingPotion;
+    healingPotion.name = "Healing Potion";
+    healingPotion.health = 50;
+
+    item sword;
+    sword.name = "Sword";
+    sword.damage = 20;
+
+    rooms[1][2].items.push_back(sword);
+    rooms[2][1].items.push_back(sword);
+    rooms[0][2].items.push_back(healingPotion);
+    rooms[1][1].items.push_back(healingPotion);
+    rooms[2][0].items.push_back(healingPotion);
 }

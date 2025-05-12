@@ -2,6 +2,7 @@
 #define ROOM_CPP
 
 #include "gameCharacter.h"
+#include "item.cpp"
 #include <vector>
 
 struct room {
@@ -9,6 +10,7 @@ struct room {
     int col;
 
     std::vector<GameCharacter> enemies;
+    std::vector<item> items;
 };
 
 #endif
