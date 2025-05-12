@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31)
-project(CPP_OOP_Introduction)
+project(Basic_Dungeon_Crawler)
 
 set(CMAKE_CXX_STANDARD 20)
 
