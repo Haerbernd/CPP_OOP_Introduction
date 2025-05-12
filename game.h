@@ -21,6 +21,8 @@ class Game {
         void handleMovementActions();
         static void printActions(std::vector<std::string> actions);
         void initiateRoomSequence();
+        void handleEnemyActions();
+        void engageInCombat();
 };
 
 #endif
