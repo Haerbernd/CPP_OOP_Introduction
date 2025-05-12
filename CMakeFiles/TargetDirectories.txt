@@ -1,3 +1,0 @@
-/home/haerbernd/CLionProjects/CPP_OOP_Introduction/CMakeFiles/OOP_Intro_Game.dir
-/home/haerbernd/CLionProjects/CPP_OOP_Introduction/CMakeFiles/edit_cache.dir
-/home/haerbernd/CLionProjects/CPP_OOP_Introduction/CMakeFiles/rebuild_cache.dir
