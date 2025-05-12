@@ -13,6 +13,8 @@ Game::Game(Player * _player, Dungeon * _dungeon) {
 void Game::initiateRoomSequence() {
     if (!player->currentRoom->enemies.empty()) {
         handleEnemyActions();
+    } else if (!player->currentRoom->items.empty()) {
+        handleItemActions();
     } else {
         handleMovementActions();
     }
@@ -102,7 +104,7 @@ void Game::engageInCombat() {
         }
 
         player->takeDamage(enemy->getDamage());
-        std::cout << enemy->getName() << " attacked you! You took " << enemy->getDamage() << " damage.\nYou now have " << player->getHealth() << " health.\n";
+        std::cout << enemy->getName() << " attacked you! You took " << enemy->getDamage() << " damage.\nYou now have " << player->getHealth() << "/" << player->getMaxHealth() << " health.\n";
         if (!player->checkIfAlive()) {
             isGameOver = true;
             std::cout << "You were killed by " << enemy->getName() << "!" << std::endl;
@@ -122,5 +124,26 @@ void Game::engageInCombat() {
             player->retreat();
             return;
         }
+    }
+}
+
+void Game::handleItemActions() {
+    const item _item = player->currentRoom->items[0];
+    std::cout << "You find a " << _item.name << " in this room!\nWhat would you like to do?\n";
+
+    std::vector<std::string> actions;
+    actions.push_back("Use/pick up item");
+    actions.push_back("Ignore item");
+    printActions(actions);
+
+    int input;
+    std::cin >> input;
+    if (input == 1) {
+        player->pickUpItem(_item);
+        std::cout << "You used/picked up a " << _item.name << ".\nYour damage is now " << player->getDamage() << " and you have " << player->getHealth() << "/" << player->getMaxHealth() << " health.\n";
+        player->currentRoom->items.clear();
+        handleMovementActions();
+    } else {
+        handleMovementActions();
     }
 }

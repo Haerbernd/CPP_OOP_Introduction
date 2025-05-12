@@ -6,11 +6,11 @@
 class GameCharacter {
     private:
         std::string name;
-        int damage;
 
     protected:
         int maxHealth;
         int currentHealth;
+        int damage;
 
     public:
         GameCharacter(std::string _name, int _health, int _damage);
