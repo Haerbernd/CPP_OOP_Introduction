@@ -6,5 +6,9 @@ int main() {
     Dungeon dungeon;
     Game game {&player, &dungeon};
 
+    while (!game.isGameOver) {
+        game.initiateRoomSequence();
+    }
+
     return EXIT_SUCCESS;
 }
