@@ -12,4 +12,5 @@ add_executable(OOP_Intro_Game main.cpp
         player.cpp
         player.h
         game.cpp
-        game.h)
+        game.h
+        item.cpp)
