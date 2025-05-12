@@ -5,8 +5,8 @@
 
 struct item {
     std::string name;
-    int damage;
-    int health;
+    int damage{};
+    int health{};
 };
 
 #endif

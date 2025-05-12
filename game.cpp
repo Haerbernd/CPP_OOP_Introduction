@@ -11,9 +11,17 @@ Game::Game(Player * _player, Dungeon * _dungeon) {
 }
 
 void Game::initiateRoomSequence() {
-    if (!player->currentRoom->enemies.empty()) {
+    room * _room = player->currentRoom;
+
+    if (_room->row == dungeon->rows-1 && _room->col == dungeon->cols-1 && _room->enemies.empty()) {
+        std::cout << "Congratulations " << player->getName() << ", you have won and escape the dungeon!" << std::endl;
+        isGameOver = true;
+        return;
+    }
+
+    if (!_room->enemies.empty()) {
         handleEnemyActions();
-    } else if (!player->currentRoom->items.empty()) {
+    } else if (!_room->items.empty()) {
         handleItemActions();
     } else {
         handleMovementActions();
