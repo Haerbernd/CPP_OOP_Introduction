@@ -13,8 +13,8 @@ class GameCharacter {
         int currentHealth;
 
     public:
-        GameCharacter(std::string, int, int);
-        void takeDamage(int);
+        GameCharacter(std::string _name, int _health, int _damage);
+        void takeDamage(int amount);
         bool checkIfAlive();
         std::string getName();
         int getHealth();

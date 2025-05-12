@@ -11,7 +11,11 @@ Game::Game(Player * _player, Dungeon * _dungeon) {
 }
 
 void Game::initiateRoomSequence() {
-    handleMovementActions();
+    if (!player->currentRoom->enemies.empty()) {
+        handleEnemyActions();
+    } else {
+        handleMovementActions();
+    }
 }
 
 
@@ -67,4 +71,56 @@ void Game::handleMovementActions() {
     player->moveToRoom((newRoom));
 
     std::cout << "You are now in room " << newRoom->row << " " << newRoom->col << std::endl;
+}
+
+void Game::handleEnemyActions() {
+    std::cout << "There is an enemy " << player->currentRoom->enemies[0].getName() << " in this room!\nWhat would you like to do?\n";
+
+    std::vector<std::string> actions;
+    actions.push_back("Engage enemy");
+    actions.push_back("Retreat");
+    printActions(actions);
+
+    int input;
+    std::cin >> input;
+    if (input == 1) {
+        engageInCombat();
+    } else {
+        player->retreat();
+    }
+}
+
+void Game::engageInCombat() {
+    GameCharacter *enemy = &player->currentRoom->enemies[0];
+    while (true) {
+        enemy->takeDamage(player->getDamage());
+        std::cout << "You strike the " << enemy->getName() << ", dealing " << player->getDamage() << " damage.\n";
+        if (!enemy->checkIfAlive()) {
+            std::cout << "You have defeated the " << enemy->getName() << "!\n\n";
+            player->currentRoom->enemies.clear();
+            return;
+        }
+
+        player->takeDamage(enemy->getDamage());
+        std::cout << enemy->getName() << " attacked you! You took " << enemy->getDamage() << " damage.\nYou now have " << player->getHealth() << " health.\n";
+        if (!player->checkIfAlive()) {
+            isGameOver = true;
+            std::cout << "You were killed by " << enemy->getName() << "!" << std::endl;
+            return;
+        }
+
+        std::cout << "Do you want to continue fighting?\n";
+
+        std::vector<std::string> actions;
+        actions.push_back("Yes, keep fighting.");
+        actions.push_back("No, retreat");
+        printActions(actions);
+
+        int input;
+        std::cin >> input;
+        if (input != 1) {
+            player->retreat();
+            return;
+        }
+    }
 }
