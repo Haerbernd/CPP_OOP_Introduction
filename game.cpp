@@ -62,6 +62,10 @@ void Game::handleMovementActions() {
     // Would normally extract the next 3 "paragraphs" into (a) new function(s) but they are so interconnected that it would be messy
     int input;
     std::cin >> input;
+    if (input > actions.size() || input < 1) {
+        std::cout << input << " is an invalid option. Try again!" << std::endl;
+        return handleMovementActions();
+    }
     const std::string& chosenAction = actions[input - 1];
 
     int horizontalMovement = 0;
@@ -93,6 +97,10 @@ void Game::handleEnemyActions() {
 
     int input;
     std::cin >> input;
+    if (input > actions.size() || input < 1) {
+        std::cout << input << " is an invalid option. Try again!" << std::endl;
+        return handleEnemyActions();
+    }
     if (input == 1) {
         engageInCombat();
     } else {
@@ -119,18 +127,25 @@ void Game::engageInCombat() {
             return;
         }
 
-        std::cout << "Do you want to continue fighting?\n";
+        while (true) {
+            std::cout << "Do you want to continue fighting?\n";
 
-        std::vector<std::string> actions;
-        actions.push_back("Yes, keep fighting.");
-        actions.push_back("No, retreat");
-        printActions(actions);
+            std::vector<std::string> actions;
+            actions.push_back("Yes, keep fighting.");
+            actions.push_back("No, retreat");
+            printActions(actions);
 
-        int input;
-        std::cin >> input;
-        if (input != 1) {
-            player->retreat();
-            return;
+            int input{};
+            std::cin >> input;
+            if (input > actions.size() || input < 1) {
+                std::cout << input << " is an invalid option. Try again!" << std::endl;
+            } else {
+                if (input == 2) {
+                    player->retreat();
+                    return;
+                }
+                break;
+            }
         }
     }
 }
@@ -146,6 +161,10 @@ void Game::handleItemActions() {
 
     int input;
     std::cin >> input;
+    if (input > actions.size() || input < 1) {
+        std::cout << input << " is an invalid option. Try again!" << std::endl;
+        return handleItemActions();
+    }
     if (input == 1) {
         player->pickUpItem(_item);
         std::cout << "You used/picked up a " << _item.name << ".\nYour damage is now " << player->getDamage() << " and you have " << player->getHealth() << "/" << player->getMaxHealth() << " health.\n";
